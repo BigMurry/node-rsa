@@ -311,8 +311,6 @@ module.exports.Key = (function () {
         this.cache.keyByteLength = (this.cache.keyBitLength + 6) >> 3;
     };
 
-    RSAKey.setPRNG = BigInteger.setPRNG;
-
     return RSAKey;
 })();
 

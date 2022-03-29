@@ -17,7 +17,8 @@ Based on jsbn library from Tom Wu http://www-cs-students.stanford.edu/~tjw/jsbn/
 const NodeRSA = require('node-rsa-ex');
 
 const myRandomBytes = bytes => someRandomBytes(bytes);
-const key = new NodeRSA({b: 512, prngFn: myRandomBytes});
+NodeRSA.setPRNG(myRandomBytes);
+const key = new NodeRSA({b: 512});
 ```
 
 ## Example
