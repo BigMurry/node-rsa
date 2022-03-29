@@ -9,6 +9,17 @@ Based on jsbn library from Tom Wu http://www-cs-students.stanford.edu/~tjw/jsbn/
 * Supports long messages for encrypt/decrypt
 * Signing and verifying
 
+## This fork changes
+
+* add support for custom PRNG
+
+```javascript
+const NodeRSA = require('node-rsa-ex');
+
+const myRandomBytes = bytes => someRandomBytes(bytes);
+const key = new NodeRSA({b: 512, prngFn: myRandomBytes});
+```
+
 ## Example
 
 ```javascript
@@ -105,8 +116,8 @@ key.exportKey([format]);
 ```
 
 * keyData — `{string|buffer}` — may be:
-    * key in PEM string 
-    * Buffer containing PEM string 
+    * key in PEM string
+    * Buffer containing PEM string
     * Buffer containing DER encoded data
     * Object contains key components
 * format  — `{string}` — format id for export/import.
@@ -161,7 +172,7 @@ console.log(publicComponents);
 
 /*
 { n: <Buffer 00 86 fa 9b a0 66 68 58 45 fc 03 83 3a 96 99 c8 ba ef b5 3c fb f1 90 52 a7 f1 0f 1e aa 30 48 8c ec 1c eb 75 2b df f2 df 9f ad 6c 64 b3 49 89 56 e7 db ... >,
-  e: 65537 
+  e: 65537
 }
 */
 ```
@@ -247,10 +258,10 @@ Questions, comments, bug reports, and pull requests are all welcome.
 
 ### 1.1.0
  * Added OpenSSH key format support.
- 
+
 ### 1.0.2
  * Importing keys from PEM now is less dependent on non-key data in files.
- 
+
 ### 1.0.1
  * `importKey()` now returns `this`
 
@@ -259,18 +270,18 @@ Questions, comments, bug reports, and pull requests are all welcome.
  * **Breaking change**: Drop support nodejs < 8.11.1
  * **Possible breaking change**: `new Buffer()` call as deprecated was replaced by `Buffer.from` & `Buffer.alloc`.
  * **Possible breaking change**: Drop support for hash scheme `sha` (was removed in node ~10). `sha1`, `sha256` and others still works.
- * **Possible breaking change**: Little change in environment detect algorithm. 
+ * **Possible breaking change**: Little change in environment detect algorithm.
 
 ### 0.4.2
  * `no padding` scheme will padded data with zeros on all environments.
- 
+
 ### 0.4.1
  * `PKCS1 no padding` scheme support.
-    
+
 ### 0.4.0
- * License changed from BSD to MIT. 
+ * License changed from BSD to MIT.
  * Some changes in internal api.
-    
+
 ### 0.3.3
  * Fixed PSS encode/verify methods with max salt length.     
 
@@ -278,7 +289,7 @@ Questions, comments, bug reports, and pull requests are all welcome.
  * Fixed environment detection in web worker.
 
 ### 0.3.0
- * Added import/export from/to raw key components. 
+ * Added import/export from/to raw key components.
  * Removed lodash from dependencies.
 
 ### 0.2.30
