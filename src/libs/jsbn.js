@@ -783,7 +783,7 @@ function bnpFromNumber(a, b) {
         }
     } else {
         // new BigInteger(int,RNG)
-        var x = crypt.randomBytes((a >> 3) + 1)
+        var x = BigInteger.randomBytes((a >> 3) + 1);
         var t = a & 7;
 
         if (t > 0)
@@ -1520,6 +1520,12 @@ BigInteger.prototype.pow = bnPow;
 BigInteger.prototype.gcd = bnGCD;
 BigInteger.prototype.isProbablePrime = bnIsProbablePrime;
 BigInteger.int2char = int2char;
+BigInteger.randomBytes = crypt.randomBytes;
+BigInteger.setPRNG = prngFn => {
+  if (typeof prngFn === 'function') {
+    BigInteger.randomBytes = prngFn;
+  }
+};
 
 // "constants"
 BigInteger.ZERO = nbv(0);

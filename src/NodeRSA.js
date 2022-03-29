@@ -69,6 +69,11 @@ module.exports = (function () {
         this.keyPair = new rsa.Key();
         this.$cache = {};
 
+        // set BigInteger's PRNG function
+        if (options && typeof options.prngFn === 'function') {
+          rsa.Key.setPRNG(options.prngFn);
+        }
+
         if (Buffer.isBuffer(key) || _.isString(key)) {
             this.importKey(key, format);
         } else if (_.isObject(key)) {

@@ -1,11 +1,25 @@
 var fs = require('fs');
+var crypt = require('crypto');
 var assert = require('chai').assert;
 var _ = require('lodash');
 var NodeRSA = require('../src/NodeRSA');
 var OAEP = require('../src/schemes/oaep');
 var constants = require('constants');
+var BigInteger = require('../src/libs/jsbn');
+
+describe('BigInteger.setPRNG', function () {
+  BigInteger.setPRNG(bytes => {
+    var b = Buffer.from('01', 'hex');
+    return b;
+  });
+  var bn1 = new BigInteger(15);
+  var bn2 = new BigInteger(9);
+
+  assert.equal(bn1.toString(16), bn2.toString(16), 'bn should equal');
+});
 
 describe('NodeRSA', function () {
+    BigInteger.setPRNG(crypt.randomBytes);
     var keySizes = [
         {b: 512, e: 3},
         {b: 512, e: 5},
